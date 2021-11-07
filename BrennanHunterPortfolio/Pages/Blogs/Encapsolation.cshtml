@@ -1,0 +1,85 @@
+﻿@page
+@model BrennanHunterPortfolio.Pages.Blogs.EncapsolationModel
+@{
+}
+
+<div class="container">
+    <h1 class="my-5">What is the Benifit of Encapsulation?</h1>
+    <div>
+        <p>
+            ***This blog is only to show encapsulation, I have not implemented the other core concepts of OOP***
+        </p>
+        <p>
+            To best illustrate the idea of encapsulation I created a program in C# that is based
+            off of one of my favorite childhood videogames, Pokémon (generation 1). In this program
+            I want a user to be able to create a Pikachu, be able to level up the Pikachu, and be
+            able to change the Pikachu’s status, but don’t want the user to be able to change the
+            Pikachu’s statistics like its attack and defense. The only time that those fields should
+            be changed, is when the Pikachu is leveled up.
+        </p>
+        <p>
+            This is made easy with encapsulation in an object-oriented language. Encapsulation means
+            to group data that belongs together into a single class along with the functions that
+            should manipulate that data. Encapsulation also implies that the data also has restricted
+            access given to it.
+        </p>
+        <p>
+            Let me first represent Pikachu in UML as a class with member veriables and member functions:
+        </p>
+        <div class="container">
+            <img src="/images/OOP/pikachu-uml.png" alt="Pikachu UML Diagram">
+        </div>
+        <p>
+            In the diagram above, I have made all the member variables private. Now, the only methods
+            that have access to those variables are the methods inside the Pikachu class. The variables
+            baseStats and actualStats in this diagram each reperesent 6 variables. BaseStats include
+            baseHP, baseAttack, baseDefence, baseSpAttack, baseSpDefence, and baseSpeed. The
+            actualStats represent hp, attack, defence, spAttack, spDefence, and speed. The baseStats
+            for Pikachu will never change, but the actualStats chage based on the Pikachu’s current level.
+        </p>
+        <p>
+            So, what does this look like in code? First let’s define all of the member variables:
+        </p>
+        <div class="container">
+            <img src="~/images/OOP/pikachu-member-variables.png" alt="Pikachu member variables">
+        </div>
+        <p>
+            Now, I need to be able to get all of the member variables so I can test the functions of
+            this class. In the UML diagram I have the function GetActualStats, but C# allows me to have
+            propertis with ‘get’ functions that will get the corisponding private variable for me.  I
+            didn’t create ‘set’ functions because I don’t want the private variables to be changed
+            outside of the class.
+        </p>
+        <div class="container">
+            <img src="~/images/OOP/pikachu-properties.png" alt="Pikachu properties" >
+        </div>
+        <p>
+            Now all that is left is the member functions of the Pikachu class. Most of these functions
+            are public because they will need to be called inside main, however there are functions inside
+            Pikachu that are only supposed to be called internally so they are marked as private.
+        </p>
+        <div class="container">
+            <img src="~/images/OOP/pikachu-functions.png" alt="Pikachu functions" >
+        </div>
+        <p>
+            Now in a seperate file, I am able to create a Pikachu, and use all the public methods available
+            to me.
+        </p>
+        <div class="container">
+            <img src="~/images/OOP/good-main.png" alt="Pikachu class can be used">
+        </div>
+        <p>
+            Here is the command line result:
+        </p>
+        <div class="container">
+            <img src="/images/OOP/good-main-result.png" alt="Pikachu class being used">
+        </div>
+        <p>
+            However, if another class tries to set a Pikachu’s private member variables, the following
+            error happens:
+        </p>
+        <div class="container border border-danger">
+            <img src="/images/OOP/bad-main.png" alt="Pikachu's private variables can't be set in main.">
+        </div>
+    </div>
+</div>
