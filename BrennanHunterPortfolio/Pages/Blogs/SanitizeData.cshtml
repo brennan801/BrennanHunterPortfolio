@@ -1,0 +1,69 @@
+﻿@page
+@model BrennanHunterPortfolio.Pages.Blogs.SanitizeDataModel
+@{
+}
+
+<div class="container">
+    <h1 class="my-5">How To Protect Database Inputs</h1>
+    <div>
+        <p>
+            A common mistake among young programmers is to not protect data inputs into a database.
+            This can cause many issues for these novice programmers and their employers. An example
+            of this is illustrated perfectly in this comic: https://xkcd.com/327/.
+        </p>
+        <p>
+            When a programmer allows unsanitized input into a database then that data could be any
+            string that a user has chosen. Which includes “Robert); DROP TABLE Students;”. If this raw
+            string was entered into a SQL command, then the entire Students table would be dropped.
+        </p>
+        <p>
+            In order to avoid this, the program needs to pass in a SQL parameter to the command instead
+            of a raw string. I had to do this when I needed to add users to a database. At first,
+            I put in the raw string into the database. Which looked something like this:
+        </p>
+        <div class="container border border-danger" >
+            <img src="~/Images/SQL/badDataInput.png" alt="badDataInput" style="width: inherit;">
+        </div>        
+        <p>
+            Depending on the language being, the tools used to sanitize the data inputs might be different,
+            the steps are generally the same.
+        </p>
+        <ol>
+            <li>
+                <div>
+                    Instantiate and open a connection:
+                </div>
+                <div>
+                    <img src="~/images/SQL/initialize.png" alt="Instanciate and open connection" style="width: inherit;">
+                </div>
+            </li>
+            <li>
+                <div>
+                    Define parameters used in command object:
+                </div>
+                <div>
+                    <img src="/images/SQL/createParams.png" alt="Define the parameters" style="width: inherit;">
+                </div>
+            </li>
+            <li>
+                <div>
+                    Add the parameters to the command:
+                </div>
+                <div>
+                    <img src="/images/SQL/addParams.png" alt="Add the parameters to the command" style="width: inherit;">
+                </div>
+            </li>
+            <li>
+                <div>
+                    Execute the command:
+                </div>
+                <div>
+                    <img src="/images/SQL/execute.png" alt="Execute the command" style="width: inherit;">
+                </div>
+            </li>
+        </ol>
+        <p>
+
+        </p>
+    </div>
+</div>
