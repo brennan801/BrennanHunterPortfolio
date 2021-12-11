@@ -1,0 +1,55 @@
+﻿@page
+@model BrennanHunterPortfolio.Pages.Blogs.StatePatternModel
+@{
+}
+<div class="container">
+    <h1 class="my-5">How And When to Use the State Pattern</h1>
+    <div>
+        <p>
+            When I was first learning about design patterns, I had a hard time understanding scenarios where
+            the patterns were actually useful. It wasn’t until I found myself in a code rut and decided to
+            look at design patterns again when I realized “Wow! These things can be really useful!” Perhaps
+            the gang of four really knew what they were doing? In this blog I am going to show how I realized
+            I needed to start using the state design pattern and how I started to implement it.
+        </p>
+        <h3>The Problem:</h3>
+        <p>
+            I was coding up a diner simulation I found myself writing this function for my waiter class:
+        </p>
+        <div class="container border border-danger">
+            <img src="~/images/OOP/StatePattern/badPattern.png" alt="anti pattern" style="width: inherit;">
+        </div>
+        <p>
+            This would have worked in the code, but it makes for an incredibly long method because I had so
+            many different states for my waiters, and I definitely didn’t want to call a different method for
+            each different state it could be in. I wanted to call Waiter.Run1() and for my waiter to do what
+            it should, given its own context. To improve my code, I had to look to design patterns. I found
+            the state pattern.
+        </p>
+        <h3>The Solution:</h3>
+        <p>
+            The state pattern has a state object call the methods instead of the original object. For my
+            Waiter solution, this meant that the waiter has an object called WaiterState. When Waiter.Run1()
+            is called, all it does is call WaiterState.Run1().  The WaiterState class is abstract and the
+            Run1() method has to be implemented by classes that inherit from it. Examples of those classes
+            would be the WaiterFree class and the WaiterGettingOrder class. Each of the classes that inherit
+            from WaiterState would override the Run1 function in their own way. Here is some UML to help
+            visualize what is going on:
+        </p>
+        <div>
+            <img src="~/images/OOP/StatePattern/uml.png" alt="Instanciate and open connection" style="width: inherit;">
+        </div>
+        <p>
+            Here is a simplified version of my implementation:
+        </p>
+        <div>
+            <img src="~/images/OOP/StatePattern/goodWaiterClass.png" alt="Instanciate and open connection" style="width: inherit;">
+        </div>
+        <div>
+            <img src="~/images/OOP/StatePattern/goodWaiterState.png" alt="Instanciate and open connection" style="width: inherit;">
+        </div>
+        <p>
+            No more if else statements! Shorter methods! Reusable code! All thanks to the state design pattern.
+        </p>
+    </div>
+</div>
