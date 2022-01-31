@@ -2,7 +2,7 @@
 @model BrennanHunterPortfolio.Pages.Blogs.SingletonPatternModel
 @{
 }
-<div class="container">
+<div style="margin-left: 15%; margin-right: 15%;">
     <h1 class="my-5">How And When to Use the Singleton Pattern</h1>
     <div>
         <p>
@@ -51,7 +51,7 @@
             note that getSB() will only create an instance of SingleBar the first time it is called. After 
             that, the one and only instance of SingleBar will be returned to the caller, instead of a new instance.
         </p>
-        <div>
+        <div class="text-center py-3">
             <img src="~/images/OOP/SingletonPattern/progress-bar.jpg" alt="progress bar class" style="width: inherit;">
         </div>
         <p>
@@ -59,7 +59,7 @@
             progress bar. I just have my threads wait for a bit, but in actuall application, the threads would 
             be doing some real, time-consuming work. 
         </p>
-        <div>
+        <div class="text-center py-3">
             <img src="~/images/OOP/SingletonPattern/thred.jpg" alt="thred class"/>
         </div>
         <p>

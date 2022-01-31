@@ -2,7 +2,7 @@
 @model BrennanHunterPortfolio.Pages.Blogs.StatePatternModel
 @{
 }
-<div class="container">
+<div style="margin-left: 15%; margin-right: 15%;">
     <h1 class="my-5">How And When to Use the State Pattern</h1>
     <div>
         <p>
@@ -16,7 +16,7 @@
         <p>
             I was coding up a diner simulation I found myself writing this function for my waiter class:
         </p>
-        <div class="container border border-danger">
+        <div class="container border border-danger text-center py-3 w-75">
             <img src="~/images/OOP/StatePattern/badPattern.png" alt="anti pattern" style="width: inherit;">
         </div>
         <p>
@@ -36,16 +36,16 @@
             from WaiterState would override the Run1 function in their own way. Here is some UML to help
             visualize what is going on:
         </p>
-        <div>
+        <div class="text-center py-3">
             <img src="~/images/OOP/StatePattern/uml.png" alt="Instanciate and open connection" style="width: inherit;">
         </div>
         <p>
             Here is a simplified version of my implementation:
         </p>
-        <div>
+        <div class="text-center py-3 w-75">
             <img src="~/images/OOP/StatePattern/goodWaiterClass.png" alt="Instanciate and open connection" style="width: inherit;">
         </div>
-        <div>
+        <div class="text-center py-3 w-75">
             <img src="~/images/OOP/StatePattern/goodWaiterState.png" alt="Instanciate and open connection" style="width: inherit;">
         </div>
         <p>
