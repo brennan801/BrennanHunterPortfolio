@@ -1,0 +1,71 @@
+﻿@page
+@model BrennanHunterPortfolio.Pages.Blogs.SingletonPatternModel
+@{
+}
+<div class="container">
+    <h1 class="my-5">How And When to Use the Singleton Pattern</h1>
+    <div>
+        <p>
+            I have found that a lot of explinations of design patterns don't explain the WHY, when describing 
+            a pattern. In all of my design pattern blogs I start by explaining the issue, or situaitons that 
+            require the pattern that is being described. After I have discussed the issue, I go into the pattern 
+            in more detail and describe how it is a solution to the problem. Hopefully this will help those who 
+            are struggling to know WHEN and WHY better, instead of just the how. 
+        </p>
+        <h3>The Problem:</h3>
+        <p>
+            Every time that I find myself using the singleton pattern, it is because I have multiple objects 
+            or threads, that need to communicate with one central object. So far, I have used the Singleton 
+            Pattern when I have been in two situations:
+        </p>
+        <ol>
+            <li>
+                Multi-Threaded Applications:<br />
+                In one program that I created I had multiple processes running at once and when each of them complete, 
+                they need to update the same progress bar. In this scenario I needed a central object to represent my 
+                progress bar. There would be issues if two processes completed at the same time and both tried to 
+                update the progress bar from 60% to 70%. The process would only be recorded once.
+            </li>
+            <li>
+                Dependency Injection:<br />
+                With dependency injection, when an object needs a service, it doesn’t create a new one 
+                itself. Instead, the service is passed to the object via the constructor. The problem arises 
+                with this dependency injection pattern when we need the same instance of the service for each 
+                object.
+            </li>
+        </ol>
+        <h3>The Solution:</h3>
+        <p>
+            The singleton offers a solution to these problems by creating one and only one instance of a class. 
+            Many implementation of the singleton pattern are lazily initialized; The singleton object is only 
+            created when it is first needed, then when it is needed again by a different class, that class is 
+            given the same instance of the already created singleton object, instead of a new one or a copy.
+        </p>
+        <p>
+            Let’s see what a simple, singleton solution to the Muli-Threaded Application problem described 
+            above could look like in Java code:
+        </p>
+        <p>
+            First lets take a look at the progress bar class. Notice that only this class can call it's own 
+            constructor, preventing any any thred from creating its own progress bar. It is also important to 
+            note that getSB() will only create an instance of SingleBar the first time it is called. After 
+            that, the one and only instance of SingleBar will be returned to the caller, instead of a new instance.
+        </p>
+        <div>
+            <img src="~/images/OOP/SingletonPattern/progress-bar.jpg" alt="progress bar class" style="width: inherit;">
+        </div>
+        <p>
+            Here is the thread class. The thread class represents whatever processes are being run to fill up the 
+            progress bar. I just have my threads wait for a bit, but in actuall application, the threads would 
+            be doing some real, time-consuming work. 
+        </p>
+        <div>
+            <img src="~/images/OOP/SingletonPattern/thred.jpg" alt="thred class"/>
+        </div>
+        <p>
+            Each thread will report and get data from the same instance of SingleBar. They aren't adding the 
+            progress to the bar themselves, but instead they are calling the Singleton's updateBar() method. 
+            This prevents the threads from all updating the progress bar to the same number. 
+        </p>
+    </div>
+</div>
