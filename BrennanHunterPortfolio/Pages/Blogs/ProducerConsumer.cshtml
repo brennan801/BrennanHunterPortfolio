@@ -24,7 +24,7 @@
             Here is a snapshot of my class variables and my constructor:
         </p>
         <div class="text-center py-3">
-            <img src="~/images/C#/ProducerConsumer/constructor.jpg" alt="producer consumer construction" style="width: inherit;">\
+            <img src="~/images/CS/ProducerConsumer/constructor.jpg" alt="producer consumer construction" style="width: inherit;">
         </div>
         <p>
             As you can see on line 9, I am implementing the IDisposable interface. This way I can create a using block in my main, and dispose of all the resources 
@@ -35,7 +35,7 @@
             Next let’s look at the public methods available to main:
         </p>
         <div class="text-center py-3">
-            <img src="~/images/C#/ProducerConsumer/enqueue.jpg" alt="public methods" style="width: inherit;">
+            <img src="~/images/CS/ProducerConsumer/enqueue.jpg" alt="public methods" style="width: inherit;">
         </div>
         <p>
             There are a few important things to note in the code block above. First notice that I am locking this entire method. This is okay because this method will 
@@ -54,7 +54,7 @@
             Next let's look at what the Cook method is actually doing: 
         </p>
         <div class="text-center py-3">
-            <img src="~/images/C#/ProducerConsumer/cook.jpg" alt="public methods" style="width: inherit;">
+            <img src="~/images/CS/ProducerConsumer/cook.jpg" alt="public methods" style="width: inherit;">
         </div>
         <p>
             The cook method starts in an infinite loop and then checks if the queue is empty (inside the queueIsEpmty method, I do lock the queue before I check the 
@@ -64,19 +64,19 @@
             Here is a shot of the CookTask class: 
         </p>
         <div class="text-center py-3">
-            <img src="~/images/C#/ProducerConsumer/cookTask.jpg" alt="cook task class" style="width: inherit;">
+            <img src="~/images/CS/ProducerConsumer/cookTask.jpg" alt="cook task class" style="width: inherit;">
         </div>
         <p>
             Now that we have all the parts in place, we can build a main function: 
         </p>
         <div class="text-center py-3">
-            <img src="~/images/C#/ProducerConsumer/main.jpg" alt="main function" style="width: inherit;">
+            <img src="~/images/CS/ProducerConsumer/main.jpg" alt="main function" style="width: inherit;">
         </div>
         <p>
             In this program, I start queue two tasks, wait a while, and then queue two more tasks. Here is what the output looks like:
         </p>
         <div class="text-center py-3">
-            <img src="~/images/C#/ProducerConsumer/output.jpg" alt="output" style="width: inherit;">
+            <img src="~/images/CS/ProducerConsumer/output.jpg" alt="output" style="width: inherit;">
         </div>
         <p>
             I have implemented a pattern very similar to this one in my diner project. However, in the project I decided that instead of using semaphores my cook 
