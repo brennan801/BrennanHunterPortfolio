@@ -1,0 +1,87 @@
+﻿@page
+@model BrennanHunterPortfolio.Pages.Blogs.ProducerConsumerModel
+@{
+}
+
+<div style="margin-left: 15%; margin-right: 15%;">
+    <h1 class="my-5">Using a Producer Consumer Queue in .NET </h1>
+    <div>
+        <h3>What is a Producer Consumer Queue?</h3>
+        <p>
+            A producer consumer queue essentially is a semaphore connected to the queue data structure. There are two processes, the producer, and the consumer. 
+            While the producer runs it creates tasks for the consumer to complete. The producer adds the tasks to a queue. The consumer takes tasks of the queue 
+            and completes them.
+        </p>
+        <h3>My Implementation: </h3>
+        <p>
+            I have created a producer consumer queue for a cook. In my implementation I have a CookPCQ class that contains: 
+            <ul>
+                <li>A thread that represents a cook</li>
+                <li>A lock to lock the queue when I am looking at or modifying the queue</li>
+                <li>The queue</li>
+                <li>An EventWaitHandle that I use for my semaphore</li>
+            </ul>
+            Here is a snapshot of my class variables and my constructor:
+        </p>
+        <div class="text-center py-3">
+            <img src="~/images/C#/ProducerConsumer/constructor.jpg" alt="producer consumer construction" style="width: inherit;">
+        </div>
+        <p>
+            As you can see on line 9, I am implementing the IDisposable interface. This way I can create a using block in my main, and dispose of all the resources 
+            when they are no longer needed. Another important thing to note is that I am starting the cook thread right when the producer consumer queue is created. 
+            However, we will see later that the thread will still wait before it starts trying to pull tasks off the queue. 
+        </p>
+        <p>
+            Next let’s look at the public methods available to main:
+        </p>
+        <div class="text-center py-3">
+            <img src="~/images/C#/ProducerConsumer/enqueue.jpg" alt="public methods" style="width: inherit;">
+        </div>
+        <p>
+            There are a few important things to note in the code block above. First notice that I am locking this entire method. This is okay because this method will 
+            hardly take any time and then the lock will go away. It is important that I do lock this because if a thread tried to look at the queue while it was being 
+            locked there could be errors.
+        </p>
+        <p>
+            The next important thing to notice is that I am only setting the semaphore when the queue was empty before I added the task. The cook thread will not wait 
+            for a semaphore if there are tasks in the queue after it has finished its current task so there is no need to set the semaphore when the queue was not 
+            previously empty.
+        </p>
+        <p>
+            In the dispose method we see that I wait for all the threads to join and then I close the semaphore to free up the OS.
+        </p>
+        <p>
+            Next let's look at what the Cook method is actually doing: 
+        </p>
+        <div class="text-center py-3">
+            <img src="~/images/C#/ProducerConsumer/cook.jpg" alt="public methods" style="width: inherit;">
+        </div>
+        <p>
+            The cook method starts in an infinite loop and then checks if the queue is empty (inside the queueIsEpmty method, I do lock the queue before I check the 
+            size). If the queue is empty then the thread waits for a signal. Once it gets a signal, it dequeues a task and then completes the task.
+        </p>
+        <p>
+            Here is a shot of the CookTask class: 
+        </p>
+        <div class="text-center py-3">
+            <img src="~/images/C#/ProducerConsumer/cookTask.jpg" alt="cook task class" style="width: inherit;">
+        </div>
+        <p>
+            Now that we have all the parts in place, we can build a main function: 
+        </p>
+        <div class="text-center py-3">
+            <img src="~/images/C#/ProducerConsumer/main.jpg" alt="main function" style="width: inherit;">
+        </div>
+        <p>
+            In this program, I start queue two tasks, wait a while, and then queue two more tasks. Here is what the output looks like:
+        </p>
+        <div class="text-center py-3">
+            <img src="~/images/C#/ProducerConsumer/output.jpg" alt="output" style="width: inherit;">
+        </div>
+        <p>
+            I have implemented a pattern very similar to this one in my diner project. However, in the project I decided that instead of using semaphores my cook 
+            thread would just check the queue every second. This had some pros and cons, but eventually I decided that it would work better for what I was trying 
+            to accomplish.
+        </p>
+    </div>
+</div>
