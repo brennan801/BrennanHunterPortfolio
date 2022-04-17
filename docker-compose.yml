@@ -17,8 +17,27 @@ services:
             context: .
             dockerfile: BrennanHunterPortfolio/Dockerfile
         restart: always
-        ports: 
-            - "5000:5000"
+
+    swag:
+        image: ghcr.io/linuxserver/swag
+        container_name: swag
+        cap_add:
+            - NET_ADMIN
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - TZ=Europe/London
+            - URL=bbhunter.duckdns.org
+            - SUBDOMAINS=www
+            - VALIDATION=http
+            - STAGING=true
+        volumes:
+            - /swag/config:/config
+            - ./default.conf:/config/nginx/site-confs/default
+        ports:
+            - 443:443
+            - 80:80
+        restart: unless-stopped
 
 volumes:
     database-data:
