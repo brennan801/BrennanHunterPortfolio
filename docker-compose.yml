@@ -30,7 +30,7 @@ services:
             - URL=bbhunter.duckdns.org
             - SUBDOMAINS=www
             - VALIDATION=http
-            - STAGING=true
+            - STAGING=false
         volumes:
             - /swag/config:/config
             - ./default.conf:/config/nginx/site-confs/default
