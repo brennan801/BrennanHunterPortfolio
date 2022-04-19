@@ -1,0 +1,40 @@
+﻿@page
+@model BrennanHunterPortfolio.Pages.Blogs.SwagModel
+@{
+}
+<div style="margin-left: 15%; margin-right: 15%;">
+    <h1 class="my-5">How to easily get an SSL cert for a website </h1>
+    <div>
+        <h3>Requirements:</h3>
+        <ul>
+            <li>Docker-compose support </li>
+            <li><a href=/Blogs/Linode>Site currently running on a VM</a></li>
+        </ul>
+        <p>
+            Getting a website secure can be a hassle, but with using swag to set up a reverse proxy, it can become a lot simpler! In this blog I will show how I 
+            easily set up this website to be certified and secure! 
+        </p>
+        <p>
+            First I had to go to <a href="http://duckdns.org">www.duckdns.org</a> to get a free domain for my site. I chose bbhunter.duckdns.org. I had to input the 
+            IP address of my virtual machine, so that it would link the dns name to my vm. 
+        </p>
+        <p>
+           Next, I added a swag service to my docker-compose file. At first, I set staging to true. It defaults to false, but if a cert is asked for too much with 
+           staging set to false then swag will stop giving certifications. Once I confirmed that everything was working correctly, I set it back to false.  
+        </p>
+        <div class="text-center py-3">
+            <img src="~/images/VM/Swag/docker-compose.jpg" alt="ssh into linode" style="width: inherit;">
+        </div>
+        <p>
+            Then I created a niginx .conf file in my repo. 
+        </p>
+        <div class="text-center py-3">
+            <img src="~/images/VM/Swag/nginx.jpg" alt="ssh into linode" style="width: inherit;">
+        </div>
+        <p>
+            I committed the changes, pushed it to github, and then pulled to changes down to my vm. From my vm I was able to run docker-compose up and it built the 
+            swag container for me. It amazing how streamlined this all was. To learn more about what is happening in the background and how to make this work for 
+            different configurations, go <a href="https://docs.linuxserver.io/general/swag">here</a>. 
+        </p>
+    </div>
+</div>
