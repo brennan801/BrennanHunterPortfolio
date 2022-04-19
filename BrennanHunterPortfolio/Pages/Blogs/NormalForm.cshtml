@@ -12,16 +12,16 @@
         <p>
             For a database to be in 1NF, each column must contain only one item. Another way of saying this is that each column must be atomic. Let me show you an example of a REALLY bad table and we will alter it so that it is in 1NF.
         </p>
-        <div class="container border border-danger text-center">
+        <div class="container border border-danger text-center my-3">
             <img src="~/images/SQL/NormalForm/start.jpg" alt="first table" style="width: inherit;">
         </div>
         <p>
             There is a lot that is wrong with this data, but I want to direct your attention to the classes column. There are multiple items in one cell of the column which means this table isn’t atomic and it doesn’t follow 1NF. We fix this by splitting the original college table into a new college table and a student_classes table. This is what that looks like.
         </p>
-        <div class="container border border-success text-center py-3 w-75">
+        <div class="container border border-success text-center my-3">
             <img src="~/images/SQL/NormalForm/college1.jpg" alt="first table" style="width: inherit;">
         </div>
-        <div class="container border border-success text-center py-3 w-75">
+        <div class="container border border-success text-center my-3 w-50">
             <img src="~/images/SQL/NormalForm/student_classes1.jpg" alt="first table" style="width: inherit;">
         </div>
         <h3>2NF</h3>
@@ -31,13 +31,13 @@
         <p>
             For instance, in our slightly improved college table each student is assigned a counselor office. However, that doesn’t really belong in a table that is mainly about students. That should belong in a counselor table! Let’s create a new table called counselors, rename our college table to be students, and give each student a Counselor ID. The Councilor ID will be associated with a councilor from the councilors table.
         </p>
-        <div class="container border border-danger text-center py-3 w-75">
+        <div class="container border border-danger text-center my-3">
             <img src="~/images/SQL/NormalForm/college1.jpg" alt="first table" style="width: inherit;">
         </div>
-        <div class="container border border-success text-center py-3 w-75">
+        <div class="container border border-success text-center my-3">
             <img src="~/images/SQL/NormalForm/student2.jpg" alt="first table" style="width: inherit;">
         </div>
-        <div class="container border border-success text-center py-3 w-75">
+        <div class="container border border-success text-center my-3 w-50">
             <img src="~/images/SQL/NormalForm/counselor2.jpg" alt="first table" style="width: inherit;">
         </div>
         <p>
@@ -45,14 +45,14 @@
         </p>
         <h3>3NF</h3>
         <p>A database in 3NF must be in 2NF. It also cannot have any transitive dependencies. A transitive dependency is something that depends on a column in a table that isn’t the tables primary key. For instance, in our students table we have the column “School Year” and the column “Has Access Card”. In this system, every student who is a Jr or a Sr has an access card. So, the “Has Access Card” is dependent on the “School Year” column and not the primary key.</p>
-        <div class="container border border-danger text-center py-3 w-75">
+        <div class="container border border-danger text-center my-3">
             <img src="~/images/SQL/NormalForm/student2.jpg" alt="first table" style="width: inherit;">
         </div>
         <p>To make it 3NF we need to make a 3rd table. We will call this table “School Year”. And we will adjust the “Students” table so that instead of having the “School Year” column and the “Has Access Card” column it will only have the a “School Year ID” column.</p>
-        <div class="container border border-success text-center py-3 w-75">
+        <div class="container border border-success text-center my-3">
             <img src="~/images/SQL/NormalForm/student3.jpg" alt="first table" style="width: inherit;">
         </div>
-        <div class="container border border-success text-center py-3 w-75">
+        <div class="container border border-success text-center my-3 w-75">
             <img src="~/images/SQL/NormalForm/schoolYear3.jpg" alt="first table" style="width: inherit;">
         </div>
         <h3>BCNF</h3>
@@ -62,7 +62,7 @@
             dependencies in the database the independent key must be a ‘super key’ meaning that it is the only key 
             needed. Here is an example that doesn’t follow BCNF.
         </p>
-        <div class="container border border-danger text-center py-3 w-75">
+        <div class="container border border-danger text-center my-3 w-50">
             <img src="~/images/SQL/NormalForm/college3-5.jpg" alt="first table" style="width: inherit;">
         </div>
         <p>
@@ -71,7 +71,7 @@
             Subject is only dependent on the professor. This doesn’t satisfy BCNF! In order to satisfy BSNF we would 
             have to separate the table like this.
         </p>
-        <div class="container border border-danger text-center py-3 w-75">
+        <div class="container border border-danger text-center my-3 w-75">
             <img src="~/images/SQL/NormalForm/student_professor3-5.jpg" alt="first table" style="width: inherit;">
         </div>
         <p>
