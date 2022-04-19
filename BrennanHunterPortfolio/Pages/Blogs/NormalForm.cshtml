@@ -12,7 +12,7 @@
         <p>
             For a database to be in 1NF, each column must contain only one item. Another way of saying this is that each column must be atomic. Let me show you an example of a REALLY bad table and we will alter it so that it is in 1NF.
         </p>
-        <div class="container border border-danger text-center py-3 w-75">
+        <div class="container border border-danger text-center">
             <img src="~/images/SQL/NormalForm/start.jpg" alt="first table" style="width: inherit;">
         </div>
         <p>
@@ -55,5 +55,28 @@
         <div class="container border border-success text-center py-3 w-75">
             <img src="~/images/SQL/NormalForm/schoolYear3.jpg" alt="first table" style="width: inherit;">
         </div>
+        <h3>BCNF</h3>
+        <p>
+            BCNF stands for Boyce-Codd Normal Form and is sometimes know as 3.5NF. It is sometimes called 3.5NF 
+            because it is very similar to 3NF. In BCNF a database must follow 3NF and for any 
+            dependencies in the database the independent key must be a ‘super key’ meaning that it is the only key 
+            needed. Here is an example that doesn’t follow BCNF.
+        </p>
+        <div class="container border border-danger text-center py-3 w-75">
+            <img src="~/images/SQL/NormalForm/college3-5.jpg" alt="first table" style="width: inherit;">
+        </div>
+        <p>
+            This table looks good to all the previously mentioned rules, but it doesn’t work with BCNF. In 
+            this table, ‘Professor’ is dependent on both the ‘Student_ID’ and the ‘Subject’ together. However, the 
+            Subject is only dependent on the professor. This doesn’t satisfy BCNF! In order to satisfy BSNF we would 
+            have to separate the table like this.
+        </p>
+        <div class="container border border-danger text-center py-3 w-75">
+            <img src="~/images/SQL/NormalForm/student_professor3-5.jpg" alt="first table" style="width: inherit;">
+        </div>
+        <p>
+            Now this database satisfies BCNF. This is useful because now we have the quickest way to find a 
+            class and our data is still all connected. 
+        </p>
     </div>
 </div>
