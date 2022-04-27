@@ -1,0 +1,16 @@
+name: Deploy Dotnet Service
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    
+jobs:
+  run-dotnet-service:
+    runs-on: self-hosted
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: docker compose
+        run: docker-compose up --build -d
