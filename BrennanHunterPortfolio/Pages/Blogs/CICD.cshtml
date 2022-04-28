@@ -2,70 +2,72 @@
 @model BrennanHunterPortfolio.Pages.Blogs.CICDModel
 @{
 }
-<h1 class="my-5">How to set up a CI/CD pipeline with Github Actions</h1>
-<div>
-    <h3>Preface:</h3>
-    <p>
-        In this blog I will be demonstrating how I was able to set up a CI/CD pipeline for this portfolio site using a Linux virtual machine and github.com.  
-    </p>
-    <h3>Requirements:</h3>
-    <ul>
-        <li>Linux virtual machine</li>
-        <li><a href=/Blogs/Linode>Site currently running on a VM</a></li>
-        <li>Application that can be ran via docker-compose</li>
-    </ul>
-    <h3>Create a Github User on Your Virtual Machine: </h3>
-    <p>
-        It is a good idea to have github act as a user that is not root. This way we implement the rule of least privilege and only allow our workflow to have limited root privileges. 
-        For me, when I add a user to a Linux machine, I like to use the “adduser” command. I decided to call my user github and so I entered the command “adduser github”. It then asks you 
-        to enter a secure password and fill out some more information. I generally just use the defaults for everything after the password. 
-    </p>
-    <p>
-        Once the github user is successfully created, type the command “su - {username}” in my case “su - github”. Now we can navigate to the repository on Github.com that we want to run 
-        on the virtual machine
-    </p>
-    <h3>Add New Actions Runner to Github</h3>
-    <p>
-       Once on the page for the repo, navigate to the settings page and find the Actions tab on the left and click on Runners. The Action-Runners page will pop up, and then click on the 
-       green “new self-hosted runner” button: 
-    </p>
-    <div class="text-center py-3">
-        <img src="~/images/VM/Actions/runner-page.jpg" alt="ssh into linode" style="width: inherit;">
+<div style="margin-left: 15%; margin-right: 15%;">
+    <h1 class="my-5">How to set up a CI/CD pipeline with Github Actions</h1>
+    <div>
+        <h3>Preface:</h3>
+        <p>
+            In this blog I will be demonstrating how I was able to set up a CI/CD pipeline for this portfolio site using a Linux virtual machine and github.com.  
+        </p>
+        <h3>Requirements:</h3>
+        <ul>
+            <li>Linux virtual machine</li>
+            <li><a href=/Blogs/Linode>Site currently running on a VM</a></li>
+            <li>Application that can be ran via docker-compose</li>
+        </ul>
+        <h3>Create a Github User on Your Virtual Machine: </h3>
+        <p>
+            It is a good idea to have github act as a user that is not root. This way we implement the rule of least privilege and only allow our workflow to have limited root privileges. 
+            For me, when I add a user to a Linux machine, I like to use the “adduser” command. I decided to call my user github and so I entered the command “adduser github”. It then asks you 
+            to enter a secure password and fill out some more information. I generally just use the defaults for everything after the password. 
+        </p>
+        <p>
+            Once the github user is successfully created, type the command “su - {username}” in my case “su - github”. Now we can navigate to the repository on Github.com that we want to run 
+            on the virtual machine
+        </p>
+        <h3>Add New Actions Runner to Github</h3>
+        <p>
+           Once on the page for the repo, navigate to the settings page and find the Actions tab on the left and click on Runners. The Action-Runners page will pop up, and then click on the 
+           green “new self-hosted runner” button: 
+        </p>
+        <div class="text-center py-3">
+            <img src="~/images/VM/Actions/runner-page.jpg" alt="ssh into linode" style="width: inherit;">
+        </div>
+        <p>
+            For Runner Image select the Linux option. A list of Linux commands should populate on the page. All of those commands need to be ran as the github user on the Linux virtual machine. 
+            I recommend running those commands one by one to get a better feel of what is going on.  
+        </p>
+        <h3>
+            Finish Setting Up Virtual Machine to Run the Actions Runner
+        </h3>
+        <p>
+            When the last command, “./run.sh” is run, then it should show that you have connected to github and that it is waiting for a workflow! That is great, but it is better to have the 
+            it running in the background. “Ctrl + c” to stop the runner, and switch back to the root user.  
+        </p>
+        <p>
+            There are a few commands that must be run as root so that we don’t have to give the github user docker access and so that the github user can run the runner as a service. First, 
+            let’s allow the github user to run a “docker-compose up” command without giving them full access to all docker commands. Here is the command to do that: “usermod -aG docker 
+            {username}”. Again, in my case the username is “github”.  
+        </p>
+        <p>
+            Next, we need run the runner as a service as the github user. This is that command “./svc.sh install github”. Once that is done, the virtual machine should be all ready to run 
+            the workflow. Now we just need to build the actual workflow and add it to the repository.  
+        </p>
+        <h3>Adding Workflow File to the Repository </h3>
+        <p>
+            If you don’t already have a “.github” directory in your repository, create one, and in that directory create another directory called “workflows”. In the workflows directory, 
+            create a .yaml file. You can name the file whatever you want that particular workflow to be called.  
+        </p>
+        <p>
+            Here is a copy of my workflow file. Your workflow file may differ depending on what you need to do to run and build your application. Thankfully for me, docker-compose makes 
+            the process very simple.  
+        </p>
+        <div class="text-center py-3">
+            <img src="~/images/VM/Actions/workflowFile.jpg" alt="ssh into linode" style="width: inherit;">
+        </div>
+        <p>
+            Now everything should be set up! Commit the changes to the repository and push it to github.com and the changes made should automatically be made on your virtual machine! 
+            You can see the workflow running, and all past workflows in the actions page on github.
+        </p>
     </div>
-    <p>
-        For Runner Image select the Linux option. A list of Linux commands should populate on the page. All of those commands need to be ran as the github user on the Linux virtual machine. 
-        I recommend running those commands one by one to get a better feel of what is going on.  
-    </p>
-    <h3>
-        Finish Setting Up Virtual Machine to Run the Actions Runner
-    </h3>
-    <p>
-        When the last command, “./run.sh” is run, then it should show that you have connected to github and that it is waiting for a workflow! That is great, but it is better to have the 
-        it running in the background. “Ctrl + c” to stop the runner, and switch back to the root user.  
-    </p>
-    <p>
-        There are a few commands that must be run as root so that we don’t have to give the github user docker access and so that the github user can run the runner as a service. First, 
-        let’s allow the github user to run a “docker-compose up” command without giving them full access to all docker commands. Here is the command to do that: “usermod -aG docker 
-        {username}”. Again, in my case the username is “github”.  
-    </p>
-    <p>
-        Next, we need run the runner as a service as the github user. This is that command “./svc.sh install github”. Once that is done, the virtual machine should be all ready to run 
-        the workflow. Now we just need to build the actual workflow and add it to the repository.  
-    </p>
-    <h3>Adding Workflow File to the Repository </h3>
-    <p>
-        If you don’t already have a “.github” directory in your repository, create one, and in that directory create another directory called “workflows”. In the workflows directory, 
-        create a .yaml file. You can name the file whatever you want that particular workflow to be called.  
-    </p>
-    <p>
-        Here is a copy of my workflow file. Your workflow file may differ depending on what you need to do to run and build your application. Thankfully for me, docker-compose makes 
-        the process very simple.  
-    </p>
-    <div class="text-center py-3">
-        <img src="~/images/VM/Actions/workflowFile.jpg" alt="ssh into linode" style="width: inherit;">
-    </div>
-    <p>
-        Now everything should be set up! Commit the changes to the repository and push it to github.com and the changes made should automatically be made on your virtual machine! 
-        You can see the workflow running, and all past workflows in the actions page on github.
-    </p>
 </div>
