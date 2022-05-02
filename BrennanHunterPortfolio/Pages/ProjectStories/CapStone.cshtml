@@ -82,9 +82,59 @@
         <p>
             After my code started piling up on the “if else” statements, I realized I should implement the state 
             pattern. This way the party could easily do different behavior based on what state it was in, 
-            without having all the “if else” statements. Click <a href="/Blog/StatePattern"></a>here to learn 
+            without having all the “if else” statements. Click <a href="/Blog/StatePattern">here</a> to learn 
             more about the state pattern. 
         </p>
-        
+        <h3>Web Application: </h3>
+        <h5>Blazor Pages: </h5>
+        <p>
+            At first, I created a Razor Pages application with ASP.NET. It worked well, but then I realized that 
+            in order to get live feedback from the simulation running in the background, I would need to 
+            implement a web-packet system with signal-R or some other web-packet framework. Then I learned about 
+            Blazor pages with ASP.NET. Blazor pages it does all of the packet sending for me, and I am able to 
+            have variables that update on the screen as soon as the value that it is bound to on the backend 
+            changes. It is amazing to see it work!
+        </p>
+        <h5>HTML Canvas:</h5>
+        <p>
+            I needed a tool to create a visualization for the simulation. I didn’t need anything too complex so I 
+            decided to use HTML canvas. It is a nice tool for creating simple shapes that are easily rendered 
+            with html. I was able to find a nuget package that provided a library that implemented the html canvas 
+            by doing C# calls.Here is the github repo for that package:
+            <a href="https://github.com/BlazorExtensions/Canvas?msclkid=6ad4edb0ca6111ec80e268d21a8d41fb">BlazorExtensions:Canvas</a>
+        </p>
     </div>
 </div>  
+<div class="contianer">
+    <h2 class="text-center">Featured Stories</h2>
+    <div class="row mb-2">
+        <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-success">OOP</strong>
+                    <h3 class="mb-0">State Pattern</h3>
+                    <div class="mb-1 text-muted">Nov 28, 2021</div>
+                    <p class="card-text mb-auto">When, How, and Why to use the state design pattern</p>
+                    <a href="/Blogs/StatePattern" class="stretched-link">Continue reading</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img src="~/images/state.jpg" style="height: 250px; width: 200px;" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-secondary">C#</strong>
+                    <h3 class="mb-0">Producer Consumer Queue in C#</h3>
+                    <div class="mb-1 text-muted">Apr 13, 2022</div>
+                    <p class="mb-auto">Example of a producer consumer queue in C#</p>
+                    <a href="/Blogs/ProducerConsumer" class="stretched-link">Continue reading</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img src="/images/default.jpg" style="height: 250px; width: 200px;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
