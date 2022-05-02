@@ -6,6 +6,7 @@
     <div class="text-center my-3">
         <h1>SimulEAT : Diner Simulation</h1>
         <h2>Snow College Bachelor’s Degree Capstone Project</h2>
+        <h5><a href="https://github.com/brennan801/Diner">Github Repository</a></h5>
     </div>
     
     <div>
@@ -51,8 +52,39 @@
              <button type="button" class="btn btn-secondary btn-lg mb-3">Sequence Diagram (PDF VIEW)</button>
         </a>
 
-        <h3>Class Implementation:</h3>
+        <h3>Implementation:</h3>
 
+        <p>
+            You can view all of my classes on github 
+            <a href="https://github.com/brennan801/Diner/tree/blazor/JCsDiner">here</a> to see exactly how I 
+            implemented my class design. There are a few special things that I did with my code that I would 
+            like to display, the Producer Consumer Queue Pattern and the State Pattern.
+        </p>
+        <h5>Producer Consumer Queue: </h5>
+        <p>
+            I decided to create a producer consumer queue for each of the types of employees. That way, my 
+            main program could be a producer thread that would create tasks for the employee and each employee 
+            could be a consumer thread that would take the tasks off of the queue and complete them. Click 
+            <a href="/Blogs/ProducerConsumer">here</a> to learn more about a producer consumer queue.  
+        </p>
+        <p>
+            Eventually I drifted a little bit away from the traditional idea of the producer consumer queue, 
+            but it was the foundation for how I set up the employees in this project.  
+        </p>
+        <h5>State Pattern:</h5>
+        <p>
+            I made a decision early on to not have each party be its own thread. Instead, each party would 
+            progress with the thread of the restaurant. In order for this to work I had to have each party do 
+            a certain task, or a certain amount of a task with each cycle of the restaurant. For instance, 
+            if the party had been given its food, then the party would spend the cycle eating. If the party 
+            was waiting to order, then the party would spend the cycle doing nothing.
+        </p>
+        <p>
+            After my code started piling up on the “if else” statements, I realized I should implement the state 
+            pattern. This way the party could easily do different behavior based on what state it was in, 
+            without having all the “if else” statements. Click <a href="/Blog/StatePattern"></a>here to learn 
+            more about the state pattern. 
+        </p>
         
     </div>
 </div>  
